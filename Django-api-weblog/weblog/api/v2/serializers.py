@@ -8,6 +8,6 @@ class ArticleSerializer(serializers.ModelSerializer):
 
         model = Article
 
-        read_only_fields = ('id','title','author','published')
+        # read_only_fields = ('id','title','author','published')
 
         fields = '__all__'

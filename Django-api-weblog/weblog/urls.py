@@ -8,8 +8,10 @@ from weblog.views import IndexView
 
 urlpatterns = [
     path('home',IndexView.as_view(),name='home'),
-    path('create/', ArticleListCreateView.as_view(), name='create'),
-    path('list/',list.as_view(),name='list'),
-    path('retrieve/<int:pk>', ArticleRetrieveUpdateDestroyView.as_view(), name='retrieve'),
+    path('api/',include('weblog.api.v1.urls')),
 
+#     path('create/', ArticleListCreateView.as_view(), name='create'),
+#     path('list/',list.as_view(),name='list'),
+#     path('retrieve/<int:pk>', ArticleRetrieveUpdateDestroyView.as_view(), name='retrieve'),
+#
 ]
