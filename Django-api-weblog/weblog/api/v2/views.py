@@ -5,11 +5,11 @@ from django.shortcuts import redirect
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, viewsets
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from weblog.api.v2 import serializers
-from weblog.models import Article
+from weblog.models import Article, Category
 
 
 class list(APIView):
@@ -21,3 +21,12 @@ class list(APIView):
 
     def post(self, request):
         pass
+
+
+class listmodelsview(viewsets.ModelViewSet):
+    queryset = Article.objects.all()
+    serializer_class = serializers.ArticleSerializer
+class categorymodellist(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = serializers.categorySerializer
+
