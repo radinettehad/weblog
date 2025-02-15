@@ -7,7 +7,7 @@ class Category(models.Model):
 
 
 class Article(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="article")
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="articles")
 
     title = models.CharField(max_length=200)
 

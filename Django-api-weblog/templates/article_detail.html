@@ -1,0 +1,86 @@
+{#{% include 'header.html' %}#}  
+{#{% block main %}#}  
+<style>  
+    body {  
+        font-family: Arial, sans-serif;  
+        direction: rtl;  
+        background-color: #f4f4f9;  
+        color: #333;  
+        margin: 0;  
+    }  
+    .btn_blue {  
+        padding: 15px 30px;  
+        font-size: 16px;  
+        margin: 10px;  
+        cursor: pointer;  
+        border: none;  
+        border-radius: 5px;  
+        background-color: #007bff;  
+        color: white;  
+        transition: background-color 0.3s, transform 0.3s;  
+    }  
+    .btn_blue:hover {  
+        background-color: #0056b3;  
+        transform: translateY(-2px);  
+    }  
+    .main {  
+        height: auto;  
+        padding: 25px 0;  
+        font-family: Arial, sans-serif;  
+        text-align: center;  
+    }  
+    h2 {  
+        color: #ff8000;  
+        margin-bottom: 20px;  
+        font-size: 24px;  
+    }  
+    .articles-container {  
+        display: flex;  
+        flex-wrap: wrap;  
+        justify-content: center;  
+    }  
+    .article {  
+        background: white;  
+        border: 1px solid #ddd;  
+        border-radius: 5px;  
+        padding: 15px;  
+        margin: 10px;  
+        width: 300px;  
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  
+        transition: transform 0.2s;  
+    }  
+    .article:hover {  
+        transform: scale(1.02);  
+    }  
+</style>  
+<div class="main">  
+    <h2>"به وبلاگ ما خوش آمدید!"</h2>  
+    <button class="btn_blue" onclick="fetchArticle()">مقالات</button>  
+    <button class="btn_blue" onclick="fetchCategory()">دسته بندی ها</button>  
+</div>  
+<div class="articles-container"></div>  
+<script>  
+    function fetchArticle() {  
+        const url = `/web/api/listmodel/`;  
+        fetch(url)  
+            .then(response => response.json())  
+            .then(data => {  
+                const articles = data;  
+                const articlesContainer = document.querySelector('.articles-container');  
+                articlesContainer.innerHTML = ''; // Clear previous articles  
+
+                articles.forEach(art => {  
+                    const container = document.createElement('div');  
+                    container.classList.add('article');  
+                    container.innerHTML = `<h3>${art.title}</h3><p>${art.content}</p>`;  
+                    
+                    articlesContainer.appendChild(container);  
+                });  
+            })  
+            .catch(error => {  
+                console.error('Error fetching data:', error);  
+            });  
+    }  
+</script>  
+{#{% endblock main %}#}  
+{#{% include 'footer.html' %}#}
